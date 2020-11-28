@@ -34,7 +34,7 @@ jobs:
         env:
           use_act: ${{ secrets.USE_ACT }}"
         run: |
-          pkgs="cops"
+          pkgs="cops "
           echo "Packages: ${pkgs}"
           echo ::set-output name=pkg::"${pkgs}"
 
@@ -49,6 +49,7 @@ jobs:
         id: make_apkg
         run: |
           pkg=$(echo ${PACKAGE} | cut -d' ' -f1)
+          echo "Package: ${pkg}"
           echo ::set-output name=pkg::"$pkg"
           cd wdpk/${pkg}
           DATE="$(date +"%m%d%Y")"
