@@ -43,7 +43,7 @@ jobs:
       - name: Get platforms
         id: platforms
         run: |
-          PLATFORMS="MyCloud"
+          PLATFORMS="WDMyCloud"
           echo "PLATFORMS=${PLATFORMS}" >> $GITHUB_ENV
 
       - name: Make APKG packages for selected platforms
