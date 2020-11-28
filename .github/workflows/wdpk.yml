@@ -34,33 +34,15 @@ jobs:
         env:
           use_act: ${{ secrets.USE_ACT }}"
         run: |
-          #if [ -z "${use_act}" ]; then
-            echo "not using act ${use_act}"
-            wget ${{ github.event.pull_request.diff_url }} -O pr.diff
-            pkg=$(grep "^\+\+\+ b/wdpk/" pr.diff | cut -d/ -f3 | uniq)
-          #else
-          #  echo "$(git show)"
-          #  pkg=$(git diff-tree --name-only --no-commit-id -r HEAD~1 | grep ^wdpk | cut -d/ -f2 | uniq || error=true)
-          #fi
-          pkgs=""
-          for p in $pkg; do
-            pkgs="${pkgs}${p} "
-          done
+          pkgs="cops"
           echo "Packages: ${pkgs}"
-          if [ -z "${use_act}" ]; then
-            echo "not using act ${use_act}"
-            echo ::set-output name=pkg::"${pkgs}"
-          else
-            echo "using act ${use_act}"
-            echo "PACKAGE=${pkgs}" >> $GITHUB_ENV
-          fi
+          echo ::set-output name=pkg::"${pkgs}"
 
       # TODO: use matrix instead
       - name: Get platforms
         id: platforms
         run: |
           PLATFORMS="MyCloud"
-          echo "Use act ${use_act}"
           echo "PLATFORMS=${PLATFORMS}" >> $GITHUB_ENV
 
       - name: Make APKG packages for selected platforms
