@@ -37,6 +37,7 @@ jobs:
           pkgs="cops "
           echo "Packages: ${pkgs}"
           echo ::set-output name=pkg::"${pkgs}"
+          echo "PACKAGE=${pkgs}" >> $GITHUB_ENV
 
       # TODO: use matrix instead
       - name: Get platforms
