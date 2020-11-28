@@ -78,7 +78,7 @@ jobs:
 
           echo "Building ${pkg} version ${VERSION}"
           echo "$(ls -l ../..)"
-          RELEASE_DIR="../../packages/${pkg}/OS5"
+          RELEASE_DIR="../../packages/${pkg}/OS3"
           mkdir -p "${RELEASE_DIR}"
 
           echo PLF $PLATFORMS - $arr - $PACKAGE
@@ -87,7 +87,7 @@ jobs:
             model=${fullmodel%-*}
             name=${fullmodel#*-}
             echo "Build ${pkg} for ${platform}"
-            ../../mksapkg-OS5 -E -s -m $model > /dev/null
+            ../../mksapkg-OS3 -E -s -m $model > /dev/null
             mv ../${platform}*.bin\(* ../${pkg}_${VERSION}_${name}.bin
           done
           echo "$(ls -l ..)"
@@ -95,19 +95,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.make_apkg.outputs.pkg }}_${{ steps.make_apkg.outputs.version }}_OS5
+          name: ${{ steps.make_apkg.outputs.pkg }}_${{ steps.make_apkg.outputs.version }}_OS3
           path: wdpk/*_*_*.bin
-
-      - name: Upload binary packages to Bintray when a tag is included
-        uses: masofcon/upload-to-bintray-github-action@master
-        with:
-          source_path: ./wdpk/${{steps.make_apkg.outputs.pkg}}_${{steps.make_apkg.outputs.version}}_*.bin
-          api_user: tfl
-          api_key: ${{ secrets.BINTRAY_API_KEY }} # An API key can be obtained from the user profile page.
-          repository: wdpksrc
-          package: ${{ steps.make_apkg.outputs.name }}
-          version: ${{ steps.make_apkg.outputs.version }}
-          upload_path: ${{ steps.make_apkg.outputs.pkg }}/OS5
-          publish: 1
-          override: 0
-        if: env.HEAD_TAG != ''
