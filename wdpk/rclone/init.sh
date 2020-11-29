@@ -2,16 +2,16 @@
 
 [ -f /tmp/debug_apkg ] && echo "APKG_DEBUG: $0 $@" >> /tmp/debug_apkg
 
-path=$(readlink -f $1)
-log=/tmp/nzbget.log
+path=$1
+log=/tmp/rclone.log
 
 echo "INIT linking files from path: $path" >> $log
 
 # create link to binary
-ln -sf $path/nzbget /usr/bin/nzbget
+ln -sf $path/rclone-*-linux-*/rclone /usr/bin/rclone
 
 # create folder for the webpage
-WEBPATH="/var/www/nzbget/"
+WEBPATH="/var/www/rclone/"
 mkdir -p $WEBPATH
 ln -sf $path/web/* $WEBPATH
 
