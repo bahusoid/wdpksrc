@@ -34,7 +34,7 @@ jobs:
         env:
           use_act: ${{ secrets.USE_ACT }}"
         run: |
-          pkgs="cops "
+          pkgs="rclone "
           echo "Packages: ${pkgs}"
           echo ::set-output name=pkg::"${pkgs}"
           echo "PACKAGE=${pkgs}" >> $GITHUB_ENV
