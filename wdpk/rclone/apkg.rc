@@ -6,7 +6,7 @@ Homepage:	https://rclone.org
 Description:	Manage files on cloud storage, including S3, business - consumer file storage services and standard transfer protocols.
 Icon:	rclone.png
 AddonShowName:	Rclone
-AddonIndexPage:	index.html
+AddonIndexPage:	index2.html
 AddonUsedPort:
 InstDepend:
 InstConflict:
